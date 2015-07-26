@@ -16,7 +16,53 @@
 
 ;;=================== Load paths ==========================
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(add-to-list 'load-path "~/.emacs.d/melpa")
+
+;;=================== Packages ============================
+
+(require 'package)
+(require 'cl)
+(setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+(package-initialize)
+
+(defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
+  markdown-mode slime ghc clojure-mode caml csharp-mode
+  fsharp-mode magit org sml-mode tuareg haskell-mode
+  zenburn-theme)
+  "A list of packages to ensure are installed at launch.")
+
+(defun prelude-packages-installed-p ()
+  "Check if all packages in `prelude-packages' are installed."
+  (every #'package-installed-p prelude-packages))
+
+(defun prelude-require-package (package)
+  "Install PACKAGE unless already installed."
+  (unless (memq package prelude-packages)
+    (add-to-list 'prelude-packages package))
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(defun prelude-require-packages (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+  (mapc #'prelude-require-package packages))
+
+(define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
+
+(defun prelude-install-packages ()
+  "Install all packages listed in `prelude-packages'."
+  (unless (prelude-packages-installed-p)
+    ;; check for new packages (package versions)
+    (message "%s" "Emacs Prelude is now refreshing its package database...")
+    (package-refresh-contents)
+    (message "%s" " done.")
+    ;; install the missing packages
+    (prelude-require-packages prelude-packages)))
+
+;; run package installation
+(prelude-install-packages)
 
 ;;=================== Settings ============================
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -34,14 +80,6 @@
 (setq-default fill-column 80)
 (setq-default truncate-lines t)
 
-;;=================== Packages ============================
-(setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(setq package-enable-at-startup nil)
-(package-initialize)
-
 ;; Add color to a shell running in emacs 'M-x shell'
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -53,8 +91,6 @@
 (win-switch-setup-keys-ijkl "\C-xo")
 (setq win-switch-idle-time 1.0)
 (setq win-switch-other-window-first nil)
-
-
 
 ;; Tramp
 (setq tramp-default-method "rsync")
@@ -114,4 +150,3 @@
  '(sml-indent-level 3)
  '(sml-rightalign-and nil)
  '(markdown-command "/usr/bin/pandoc"))
-
