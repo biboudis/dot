@@ -28,9 +28,9 @@
 (package-initialize)
 
 (defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
-  markdown-mode slime ghc clojure-mode caml csharp-mode
-  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
-  zenburn-theme)
+					  markdown-mode slime ghc clojure-mode caml csharp-mode
+					  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
+					  zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
