@@ -1,18 +1,15 @@
 ;;; pos-tip-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("pos-tip-pkg.el" "pos-tip.el") (21898
-;;;;;;  50021 89436 83000))
+;;;### (autoloads nil nil ("pos-tip.el") (21940 59800 492607 993000))
 
 ;;;***
 
-(provide 'pos-tip-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; pos-tip-autoloads.el ends here
