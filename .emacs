@@ -25,6 +25,8 @@
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+(package-initialize)
+
 (defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
 					  markdown-mode slime ghc clojure-mode caml csharp-mode
 					  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
