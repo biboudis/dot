@@ -2,17 +2,31 @@
 ;; February 2012
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (\` ((".*" (\, temporary-file-directory) t))))
  '(backup-directory-alist (\` ((".*" \, temporary-file-directory))))
  '(column-number-mode 1)
  '(comint-prompt-read-only t)
  '(compilation-always-kill t)
  '(compilation-scroll-output (quote first-erro))
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
+ '(line-number-mode t)
+ '(magit-last-seen-setup-instructions "1.4.0" t)
  '(markdown-command "/usr/bin/pandoc")
- '(tuareg-support-metaocaml t))
+ '(show-paren-mode t)
+ '(sml-electric-pipe-mode nil t)
+ '(sml-indent-args 3 t)
+ '(sml-indent-level 3 t)
+ '(sml-rightalign-and nil t)
+ '(tuareg-electric-close-vector t)
+ '(tuareg-support-metaocaml t)
+ '(tuareg-use-abbrev-mode nil))
 
 (setq sml-electric-pipe-mode nil)
 (setq sml-indent-args 3)
@@ -165,3 +179,9 @@
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
