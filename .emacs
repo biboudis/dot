@@ -1,4 +1,4 @@
-;; Aggelos Biboudis 
+					; Aggelos Biboudis 
 ;; February 2012
 
 ;;=================== Get system path ====================
@@ -25,8 +25,6 @@
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(package-initialize)
-
 (defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
 					  markdown-mode slime ghc clojure-mode caml csharp-mode
 					  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
@@ -45,8 +43,7 @@
     (package-install package)))
 
 (defun prelude-require-packages (packages)
-  "Ensure PACKAGES are installed.
-Missing packages are installed automatically."
+  "Ensure PACKAGES are installed. Missing packages are installed automatically."
   (mapc #'prelude-require-package packages))
 
 (define-obsolete-function-alias 'prelude-ensure-module-deps 'prelude-require-packages)
@@ -63,22 +60,6 @@ Missing packages are installed automatically."
 
 ;; run package installation
 (prelude-install-packages)
-
-;;=================== Settings ============================
-(setq magit-last-seen-setup-instructions "1.4.0")
-(setq compilation-scroll-output 'first-error)
-(setq auto-mode-alist (cons '("\\.tex" . latex-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.jrag" . java-mode) auto-mode-alist))
-(setq comint-prompt-read-only t)
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-(setq tool-bar-mode 0)
-(line-number-mode 1)
-(column-number-mode 1)
-(setq-default fill-column 80)
-(setq-default truncate-lines t)
 
 ;; Add color to a shell running in emacs 'M-x shell'
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
@@ -142,6 +123,9 @@ Missing packages are installed automatically."
 (autoload 'run-sml "sml-proc" "Run an inferior SML process." t)
 (add-to-list 'auto-mode-alist '("\\.\\(sml\\|sig\\)\\'" . sml-mode))
 
+(setq auto-mode-alist (cons '("\\.tex" . latex-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.jrag" . java-mode) auto-mode-alist))
+
 (custom-set-variables
  '(compilation-always-kill t)
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
@@ -149,4 +133,22 @@ Missing packages are installed automatically."
  '(sml-indent-args 3)
  '(sml-indent-level 3)
  '(sml-rightalign-and nil)
- '(markdown-command "/usr/bin/pandoc"))
+ '(markdown-command "/usr/bin/pandoc")
+ '(magit-last-seen-setup-instructions "1.4.0")
+ '(compilation-scroll-output 'first-erro)
+ '(comint-prompt-read-only t)
+ '(backup-directory-alist `((".*" . ,temporary-file-directory)))
+ '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+ '(line-number-mode 1)
+ '(column-number-mode 1)
+ '(show-paren-mode t))
+
+(message "Deleting old backup files...")
+(let ((week (* 60 60 24 7))
+      (current (float-time (current-time))))
+  (dolist (file (directory-files temporary-file-directory t))
+    (when (and (backup-file-name-p file)
+	       (> (- current (float-time (fifth (file-attributes file))))
+		  week))
+      (message "%s" file)
+      (delete-file file))))
