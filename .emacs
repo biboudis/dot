@@ -2,25 +2,25 @@
 ;; February 2012
 
 (custom-set-variables
- '(compilation-always-kill t)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
- '(sml-electric-pipe-mode nil)
- '(sml-indent-args 3)
- '(sml-indent-level 3)
- '(sml-rightalign-and nil)
- '(markdown-command "/usr/bin/pandoc")
- '(magit-last-seen-setup-instructions "1.4.0")
- '(compilation-scroll-output 'first-erro)
- '(comint-prompt-read-only t)
- '(backup-directory-alist `((".*" . ,temporary-file-directory)))
- '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
- '(line-number-mode 1)
+ '(auto-save-file-name-transforms (\` ((".*" (\, temporary-file-directory) t))))
+ '(backup-directory-alist (\` ((".*" \, temporary-file-directory))))
  '(column-number-mode 1)
- '(show-paren-mode t)
- '(TeX-auto-save t)
- '(TeX-parse-self t)
- '(reftex-plug-into-AUCTeX t))
+ '(comint-prompt-read-only t)
+ '(compilation-always-kill t)
+ '(compilation-scroll-output (quote first-erro))
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(markdown-command "/usr/bin/pandoc")
+ '(tuareg-support-metaocaml t))
 
+(setq sml-electric-pipe-mode nil)
+(setq sml-indent-args 3)
+(setq sml-indent-level 3)
+(setq sml-rightalign-and nil)
+(setq line-number-mode t)
+(setq show-paren-mode 1)
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;=================== Get system path ====================
 
@@ -117,10 +117,6 @@
 
 (require 'project-root)
 
-(custom-set-variables
- '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-log t))
 (eval-after-load 'haskell-mode '(progn
 				  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
 				  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
@@ -146,9 +142,11 @@
 (autoload 'run-sml "sml-proc" "Run an inferior SML process." t)
 (add-to-list 'auto-mode-alist '("\\.\\(sml\\|sig\\)\\'" . sml-mode))
 
+;; Custom modes
 (setq auto-mode-alist (cons '("\\.tex" . latex-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.jrag" . java-mode) auto-mode-alist))
 
+;; Backup files
 (message "Deleting old backup files...")
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))
@@ -159,7 +157,7 @@
       (message "%s" file)
       (delete-file file))))
 
-
+;; Latex files
 (setq-default TeX-master nil)
 
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
