@@ -1,5 +1,26 @@
-					; Aggelos Biboudis 
+; Aggelos Biboudis 
 ;; February 2012
+
+(custom-set-variables
+ '(compilation-always-kill t)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(sml-electric-pipe-mode nil)
+ '(sml-indent-args 3)
+ '(sml-indent-level 3)
+ '(sml-rightalign-and nil)
+ '(markdown-command "/usr/bin/pandoc")
+ '(magit-last-seen-setup-instructions "1.4.0")
+ '(compilation-scroll-output 'first-erro)
+ '(comint-prompt-read-only t)
+ '(backup-directory-alist `((".*" . ,temporary-file-directory)))
+ '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+ '(line-number-mode 1)
+ '(column-number-mode 1)
+ '(show-paren-mode t)
+ '(TeX-auto-save t)
+ '(TeX-parse-self t)
+ '(reftex-plug-into-AUCTeX t))
+
 
 ;;=================== Get system path ====================
 
@@ -128,23 +149,6 @@
 (setq auto-mode-alist (cons '("\\.tex" . latex-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.jrag" . java-mode) auto-mode-alist))
 
-(custom-set-variables
- '(compilation-always-kill t)
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
- '(sml-electric-pipe-mode nil)
- '(sml-indent-args 3)
- '(sml-indent-level 3)
- '(sml-rightalign-and nil)
- '(markdown-command "/usr/bin/pandoc")
- '(magit-last-seen-setup-instructions "1.4.0")
- '(compilation-scroll-output 'first-erro)
- '(comint-prompt-read-only t)
- '(backup-directory-alist `((".*" . ,temporary-file-directory)))
- '(auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
- '(line-number-mode 1)
- '(column-number-mode 1)
- '(show-paren-mode t))
-
 (message "Deleting old backup files...")
 (let ((week (* 60 60 24 7))
       (current (float-time (current-time))))
@@ -154,3 +158,12 @@
 		  week))
       (message "%s" file)
       (delete-file file))))
+
+
+(setq-default TeX-master nil)
+
+(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
