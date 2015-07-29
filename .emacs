@@ -1,4 +1,4 @@
-					; Aggelos Biboudis 
+; Aggelos Biboudis 
 ;; February 2012
 
 (custom-set-variables
@@ -16,18 +16,20 @@
  '(markdown-command "/usr/bin/pandoc")
  '(tuareg-electric-close-vector t)
  '(tuareg-support-metaocaml t)
- '(tuareg-use-abbrev-mode nil))
+ '(tuareg-use-abbrev-mode nil)
+ '(show-paren-mode 1))
 
 (setq sml-electric-pipe-mode nil)
 (setq sml-indent-args 3)
 (setq sml-indent-level 3)
 (setq sml-rightalign-and nil)
 (setq line-number-mode t)
-(setq show-paren-mode 1)
 (setq magit-last-seen-setup-instructions "1.4.0")
 (setq auto-save-file-name-transforms (\` ((".*" (\, temporary-file-directory) t))))
 (setq backup-directory-alist (\` ((".*" \, temporary-file-directory))))
 (setq reftex-plug-into-AUCTeX t)
+(setq desktop-restore-frames nil)
+
 ;;=================== Get system path ====================
 
 (defun set-exec-path-from-shell-PATH ()
