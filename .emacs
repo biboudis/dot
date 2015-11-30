@@ -29,6 +29,7 @@
 (setq backup-directory-alist (\` ((".*" \, temporary-file-directory))))
 (setq reftex-plug-into-AUCTeX t)
 (setq desktop-restore-frames nil)
+(setq dired-listing-switches "-aBhl  --group-directories-first")
 
 ;;=================== Get system path ====================
 
@@ -59,7 +60,7 @@
 (defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
 					  markdown-mode slime ghc clojure-mode caml csharp-mode
 					  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
-					  zenburn-theme)
+					  zenburn-theme autodisass-java-bytecode)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -98,6 +99,8 @@
 
 ;; Theme
 (load-theme 'zenburn t)
+
+(require 'autodisass-java-bytecode)
 
 (require 'win-switch)
 (win-switch-setup-keys-ijkl "\C-xo")
