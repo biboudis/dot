@@ -14,10 +14,11 @@
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(markdown-command "/usr/bin/pandoc")
+ '(show-paren-mode 1)
+ '(truncate-lines t)
  '(tuareg-electric-close-vector t)
  '(tuareg-support-metaocaml t)
- '(tuareg-use-abbrev-mode nil)
- '(show-paren-mode 1))
+ '(tuareg-use-abbrev-mode nil))
 
 (setq sml-electric-pipe-mode nil)
 (setq sml-indent-args 3)
@@ -31,6 +32,7 @@
 (setq desktop-restore-frames nil)
 (setq dired-listing-switches "-aBhl  --group-directories-first")
 
+(add-to-list 'same-window-buffer-names "*grep*")
 ;;=================== Get system path ====================
 
 (defun set-exec-path-from-shell-PATH ()
@@ -175,3 +177,9 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
