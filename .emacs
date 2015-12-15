@@ -55,14 +55,14 @@
 (require 'cl)
 (setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")))
 
 (package-initialize)
 
 (defvar prelude-packages '(ack-and-a-half auctex auctex-latexmk
 					  markdown-mode slime ghc clojure-mode caml csharp-mode
 					  fsharp-mode magit org sml-mode scala-mode2 tuareg haskell-mode
-					  zenburn-theme autodisass-java-bytecode)
+					  zenburn-theme autodisass-java-bytecode racket-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
